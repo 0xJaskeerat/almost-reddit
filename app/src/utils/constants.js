@@ -1,3 +1,4 @@
-export const DATABASE_ID = 'your_database_id';
-export const POSTS_COLLECTION_ID = 'your_posts_collection_id';
-export const COMMENTS_COLLECTION_ID = 'your_comments_collection_id';
+// src/utils/constants.js
+export const DATABASE_ID = import.meta.env.VITE_REACT_APP_APPWRITE_DATABASE_ID;
+export const POSTS_COLLECTION_ID = import.meta.env.VITE_REACT_APP_APPWRITE_POSTS_COLLECTION_ID;
+export const COMMENTS_COLLECTION_ID = import.meta.env.VITE_REACT_APP_APPWRITE_COMMENTS_COLLECTION_ID;

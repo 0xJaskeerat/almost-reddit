@@ -5,22 +5,24 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { UserProvider, useUser } from './utils/UserContext';
 
+
 const PrivateRoute = ({ element: Element, ...rest }) => {
-  const { user } = useUser();
-  return user ? <Element {...rest} /> : <Navigate to="/login" />;
+  return <Element {...rest} />
 };
 
 const App = () => {
+  const { user } = useUser();
   return (
-    <UserProvider>
-      <Router>
-        <Routes>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<PrivateRoute element={Home} />} />
-        </Routes>
-      </Router>
-    </UserProvider>
+    <Router>
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        {
+          user
+            ? <Route path="/" element={<PrivateRoute element={Home} />} />
+            : <Route path="/login" element={<Login />} />
+        }
+      </Routes>
+    </Router>
   );
 };
 

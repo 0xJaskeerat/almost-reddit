@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { account } from '../utils/appwrite';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../utils/UserContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await account.createSession(email, password);
-      navigate('/');
+      const res = await account.createEmailPasswordSession(email, password);
+      setUser(res);
+      navigate("/");
     } catch (error) {
-      console.error(error);
       alert('Login failed');
     }
   };

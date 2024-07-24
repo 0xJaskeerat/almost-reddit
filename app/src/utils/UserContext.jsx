@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
       try {
         const accountData = await account.get();
         setUser(accountData);
-      } catch {
+      } catch(error) {
         setUser(null);
       }
     };
