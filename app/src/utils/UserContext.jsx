@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { account } from '../utils/appwrite';
+import Loader from '../components/Loader';
 
 const UserContext = createContext();
 
@@ -25,7 +26,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Replace with your loading spinner/component
+    return <Loader /> // Replace with your loading spinner/component
   }
 
   return (
