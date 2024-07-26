@@ -21,27 +21,31 @@ const Post = ({ id, title, content, imageURL, onDelete }) => {
     <div className="bg-gray-800 text-white shadow-md rounded-lg p-4 my-4 border border-gray-700">
       <h2 className="text-xl font-semibold mb-2 text-gray-200">{title}</h2>
       <p className="text-gray-400 mb-4">{content}</p>
-      <div className="flex items-center mb-4">
-      </div>
-      <div className="flex items-center mb-4">
-        {imageURL && <img src={imageURL} alt={title} width={320} height={240} className="my-4 max-w-full h-auto rounded" />}
-      <button 
-          onClick={handleDelete} 
-          className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700"
-        >
-          Delete
-        </button>
-        <button 
-          onClick={toggleComments} 
-          className="bg-gray-600 text-white px-3 py-1 rounded-lg hover:bg-gray-700 ml-2"
-        >
-          {showComments ? 'Hide Comments' : 'Show Comments'}
-        </button>
+      <div className="flex flex-col mb-4">
+        <span>
+
+          {imageURL && <img src={imageURL} alt={title} width={320} height={240} className="my-4 max-w-full h-auto rounded" />}
+        </span>
+        <div className='flex items-center gap-2'>
+
+          <button
+            onClick={handleDelete}
+            className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700"
+          >
+            Delete
+          </button>
+          <button
+            onClick={toggleComments}
+            className="bg-gray-600 text-white px-3 py-1 rounded-lg hover:bg-gray-700 ml-2"
+          >
+            {showComments ? 'Hide Comments' : 'Show Comments'}
+          </button>
+        </div>
       </div>
       {showComments && (
         <>
           <CommentList postId={id} />
-          <CreateComment postId={id} onAddComment={() => {}} />
+          <CreateComment postId={id} onAddComment={() => { }} />
         </>
       )}
     </div>
