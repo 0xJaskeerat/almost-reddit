@@ -1,11 +1,10 @@
-import { Query } from 'appwrite';
-import { databases } from './appwrite';
-import { DATABASE_ID, POSTS_COLLECTION_ID, COMMENTS_COLLECTION_ID } from './constants';
+import { databases, storage } from './appwrite';
+import { DATABASE_ID, POSTS_COLLECTION_ID, BUCKET_ID } from './constants';
 
 // Posts API
-export const createPost = async (title, content, imageId) => {
+export const createPost = async (title, content, imageURL) => {
   try {
-    return await databases.createDocument(DATABASE_ID, POSTS_COLLECTION_ID, 'unique()', { title, content, imageId });
+    return await databases.createDocument(DATABASE_ID, POSTS_COLLECTION_ID, 'unique()', { title, content, imageURL });
   } catch (error) {
     console.error(error);
     throw error;
@@ -31,9 +30,10 @@ export const deletePost = async (postId) => {
   }
 };
 
-export const updatePostVotes = async (postId, upvotes, downvotes) => {
+export const uploadImage = async (file) => {
   try {
-    return await databases.updateDocument(DATABASE_ID, POSTS_COLLECTION_ID, postId, { upvotes, downvotes });
+    const response = await storage.createFile(BUCKET_ID, 'unique()', file);
+    return response;
   } catch (error) {
     console.error(error);
     throw error;
@@ -59,4 +59,8 @@ export const fetchComments = async (postId) => {
     console.error(error);
     throw error;
   }
+};
+
+export const getFilePreviewURL = (fileId) => {
+  return storage.getFilePreview(BUCKET_ID, fileId).href;
 };
