@@ -3,7 +3,7 @@ import { deletePost } from '../utils/api';
 import CommentList from './CommentList';
 import CreateComment from './CreateComment';
 
-const Post = ({ id, title, content, onDelete }) => {
+const Post = ({ id, title, content, imageURL, onDelete }) => {
   const [showComments, setShowComments] = useState(false);
 
   const handleDelete = async () => {
@@ -24,7 +24,8 @@ const Post = ({ id, title, content, onDelete }) => {
       <div className="flex items-center mb-4">
       </div>
       <div className="flex items-center mb-4">
-        <button 
+        {imageURL && <img src={imageURL} alt={title} width={320} height={240} className="my-4 max-w-full h-auto rounded" />}
+      <button 
           onClick={handleDelete} 
           className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700"
         >

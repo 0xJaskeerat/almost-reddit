@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
-import { createPost } from '../utils/api';
+import { createPost, uploadImage, getFilePreviewURL } from '../utils/api';
 
 const CreatePost = ({ addPost }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const post = await createPost(title, content);
+      let imageURL = '';
+      if (image) {
+        console.log("image", image);
+        const imageResponse = await uploadImage(image);
+        console.log("imageResponse", imageResponse);
+        imageURL = getFilePreviewURL(imageResponse.$id);
+      }
+
+      const post = await createPost(title, content, imageURL);
       addPost(post);
       setTitle('');
       setContent('');
+      setImage(null);
     } catch (error) {
       console.error(error);
       alert('Failed to create post');
@@ -35,7 +49,7 @@ const CreatePost = ({ addPost }) => {
         <label className="my-4">Content</label>
         <textarea
           placeholder="Content"
-          className="my-3 bg-transparent rounded-xl text-sm border border-gray-600 m px-6 py-4 w-full h-32 text-white focus:outline-none focus:border-blue-500"
+          className="my-3 bg-transparent rounded-xl text-sm border border-gray-600 px-6 py-4 w-full h-32 text-white focus:outline-none focus:border-blue-500"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
@@ -44,7 +58,8 @@ const CreatePost = ({ addPost }) => {
         <input
           type="file"
           className="my-3 bg-transparent rounded-xl text-sm border border-gray-600 px-6 py-4 w-full text-white focus:outline-none"
-          multiple
+          onChange={handleImageChange}
+          accept="image/*"
         />
 
         <div className="flex justify-end mt-4">
