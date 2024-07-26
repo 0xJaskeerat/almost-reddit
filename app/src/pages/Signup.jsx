@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { account } from '../utils/appwrite';
 import { useNavigate } from 'react-router-dom';
+import RedditLogo from '../../public/redditlogo.svg';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -20,32 +21,46 @@ const Signup = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <form className="bg-white shadow-md rounded p-4 my-4" onSubmit={handleSignup}>
-        <h2 className="text-xl font-bold mb-2">Signup</h2>
-        <input
-          type="text"
-          placeholder="Name"
-          className="border p-2 mb-2 w-full"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      <div className="flex flex-col items-center bg-gray-800 p-6 rounded-lg shadow-lg">
+        <img
+          src={RedditLogo}
+          alt="Reddit Logo"
+          className='h-16 w-16 mb-4'
         />
-        <input
-          type="email"
-          placeholder="Email"
-          className="border p-2 mb-2 w-full"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="border p-2 mb-2 w-full"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className="bg-blue-500 text-white p-2 rounded" type="submit">Signup</button>
-      </form>
+
+        <h2 className="text-2xl font-bold mb-6">Signup</h2>
+        <form className="w-full max-w-sm" onSubmit={handleSignup}>
+          <input
+            type="text"
+            placeholder="Name"
+            className="bg-gray-700 border border-gray-600 p-2 mb-4 w-full rounded"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            className="bg-gray-700 border border-gray-600 p-2 mb-4 w-full rounded"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="bg-gray-700 border border-gray-600 p-2 mb-4 w-full rounded"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <h4 className='my-3 text-gray-400'>Already on Almost Reddit❓ <a href="/login" rel="noopener noreferrer" className='underline text-white'>Login</a></h4>
+
+          <button className="bg-blue-600 text-white p-2 rounded w-full mb-4" type="submit">Signup</button>
+
+        </form>
+        <p className="text-xs text-gray-400 text-center w-80">
+          By continuing, you agree to our <a href="/user-agreement" className="underline">User Agreement</a> and acknowledge that you understand the <a href="/privacy-policy" className="underline">Privacy Policy</a>.
+        </p>
+      </div>
     </div>
   );
 };
