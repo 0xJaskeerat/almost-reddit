@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createPost, uploadImage, getFilePreviewURL } from '../utils/api';
 
-const CreatePost = ({ addPost }) => {
+const CreatePost = ({ addPost, closeModal }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
@@ -26,6 +26,7 @@ const CreatePost = ({ addPost }) => {
       setTitle('');
       setContent('');
       setImage(null);
+      closeModal();
     } catch (error) {
       console.error(error);
       alert('Failed to create post');
@@ -33,7 +34,7 @@ const CreatePost = ({ addPost }) => {
   };
 
   return (
-    <div className="bg-gray-800 text-white px-24 py-12 rounded-lg shadow-lg">
+    <div>
       <h2 className="text-2xl font-bold mb-4 text-gray-400">Create Post</h2>
 
       <form onSubmit={handleSubmit} className="">

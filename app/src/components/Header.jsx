@@ -8,7 +8,7 @@ import UserAvatar from '../../public/Avatar.png';
 import { useUser } from '../utils/UserContext';
 import { Avatars } from 'appwrite';
 
-const Header = () => {
+const Header = ({ onCreatePostClick }) => {
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -30,13 +30,10 @@ const Header = () => {
   );
 
   return (
-    <header className="bg-gray-800 text-white px-4 py-4 flex justify-between items-center border-b-[1px] border-slate-500">
+    <header className="sticky top-0 bg-gray-800 text-white px-4 py-4 flex justify-between items-center border-b-[1px] border-slate-500">
       <div className="flex items-center space-x-4">
-        <img
-          src={RedditLogo}
-          alt="Reddit Logo"
-          className='h-10 w-10'
-        />
+        <img src={RedditLogo} alt="Reddit Logo" className="h-10 w-10" />
+        <h1 className="text-xl font-bold ml-2">Almost Reddit</h1>
       </div>
 
       <div className="flex-grow flex justify-center">
@@ -49,10 +46,14 @@ const Header = () => {
 
       <div className="flex items-center space-x-4">
         <button>
-          <img src={NotificationIcon} alt="Notifications" className="w-5 mx-1 h-5" />
+          <img src={ChatIcon} alt="Chat" className="w-5 mx-1 h-5" />
+        </button>
+        <button onClick={onCreatePostClick} className='flex gap-1 items-center'>
+          <span className='text-3xl'>+</span>
+          <span>Create</span>
         </button>
         <button>
-          <img src={ChatIcon} alt="Chat" className="w-5 mx-1 h-5" />
+          <img src={NotificationIcon} alt="Notifications" className="w-5 mx-1 h-5" />
         </button>
         <button className="bg-gray-700 p-2 rounded-full">
           <img src={result.href || UserAvatar} alt="User Avatar" className="w-6 h-6 rounded-full" />

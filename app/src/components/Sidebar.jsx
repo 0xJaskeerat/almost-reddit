@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '../../public/home.svg'; // Replace with your icons
 import PopularIcon from '../../public/popular.svg';
 import AllIcon from '../../public/all.svg';
-import CommunityIcon from '../../public/community.png';
+import CommunityIcon from '../../public/community.svg';
 
 const Sidebar = () => {
   return (
-    <div className="bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col">
+    <div className="fixed bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col border-r-[1px] border-slate-500">
       <nav className="flex flex-col space-y-2">
         <Link to="/" className="flex items-center p-2 rounded-lg hover:bg-gray-700">
           <img src={HomeIcon} alt="Home" className="w-4 h-4 mr-4" />
@@ -31,7 +31,7 @@ const Sidebar = () => {
       </nav>
 
       <div className="mt-auto">
-        <p className="text-xs text-gray-400">© 2024 Reddit Clone</p>
+        <p className="text-xs text-gray-400">© 2024 Almost Reddit</p>
       </div>
     </div>
   );
