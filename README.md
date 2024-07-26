@@ -42,8 +42,6 @@ To run this project locally:
 
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 
-## Generated Stuffs
-
 # React + Vite + Appwrite
 
 This template should help get you started developing with React, Vite, and Appwrite.
