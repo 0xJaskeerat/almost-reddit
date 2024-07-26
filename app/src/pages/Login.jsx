@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { account } from '../utils/appwrite';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../utils/UserContext';
 import RedditLogo from '../../public/redditlogo.svg';
 import DiscordLogo from '../../public/discordlogo.svg';
 import GithubLogo from '../../public/gitHublogo.svg';
+import { OAuthProvider } from 'appwrite';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
 
+  // email and password login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -23,6 +25,47 @@ const Login = () => {
     }
   };
 
+  // login with github
+  const handleLoginWithGithub = async () => {
+    try {
+      account.createOAuth2Session(
+        OAuthProvider.Github,
+        'http://localhost:5173/',
+        'http://localhost:5173/login',
+      );
+    } catch (error) {
+      alert('Github Login failed')
+    }
+  }
+
+  const handleLoginWithDiscord = () => {
+    try {
+      account.createOAuth2Session(
+        OAuthProvider.Discord,
+        'http://localhost:5173/',
+        'http://localhost:5173/login',
+      );
+    } catch (error) {
+      alert('Discord Login failed')
+    }
+  }
+
+  const handleAnonymousLogin = () => {
+    try {
+      const promise = account.createAnonymousSession();
+
+      promise.then(function (response) {
+        if(response){
+          navigate('/')
+        }
+      }, function (error) {
+        console.log(error); // Failure
+      });
+    } catch (error) {
+      alert('Anonymous Login failed')
+    }
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="flex flex-col items-center bg-gray-800 p-6 rounded-lg shadow-lg">
@@ -31,7 +74,7 @@ const Login = () => {
           alt="Reddit Logo"
           className='h-16 w-16 mb-4'
         />
-        
+
         <h2 className="text-2xl font-bold mb-6">Login</h2>
         <form className="w-full max-w-sm" onSubmit={handleLogin}>
           <input
@@ -48,7 +91,10 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <h4 className='my-3 text-gray-400'>New to Almost Reddit❓ <a href="/signup" rel="noopener noreferrer" className='underline text-white'>Signup</a></h4>
+
           <button className="bg-blue-600 text-white p-2 rounded w-full mb-4" type="submit">Login</button>
+
         </form>
 
         <div className="flex items-center my-6 w-full max-w-sm">
@@ -58,16 +104,19 @@ const Login = () => {
         </div>
 
         <div className="flex flex-col items-center space-y-4 mb-6">
-          <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="flex items-center px-2 py-1 bg-gray-700 rounded-full">
+          <button className="flex items-center px-2 py-1 bg-gray-700 rounded-full" onClick={handleLoginWithGithub}>
+            <img src={GithubLogo} alt="Github" className="w-8 h-8 mr-2" />
+            <span className="text-white">Continue with Github</span>
+          </button>
+          <button className="flex items-center px-2 py-1 bg-gray-700 rounded-full" onClick={handleLoginWithDiscord}>
             <img src={DiscordLogo} alt="Discord" className="w-8 h-8 mr-2" />
             <span className="text-white">Continue with Discord</span>
-          </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center px-2 py-1 bg-gray-700 rounded-full">
-            <img src={GithubLogo} alt="GitHub" className="w-8 h-8 mr-2" />
-            <span className="text-white">Continue with GitHub</span>
-          </a>
+          </button>
+          <button className="flex items-center justify-center w-full px-2 py-2 bg-gray-700 rounded-full" onClick={handleAnonymousLogin}>
+            <span className="text-white">Continue Anonymously 🫣</span>
+          </button>
         </div>
-        
+
         <p className="text-xs text-gray-400 text-center w-80">
           By continuing, you agree to our <a href="/user-agreement" className="underline">User Agreement</a> and acknowledge that you understand the <a href="/privacy-policy" className="underline">Privacy Policy</a>.
         </p>
