@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-800 text-white px-16 py-4 flex justify-between items-center">
+    <header className="bg-gray-800 text-white px-4 py-4 flex justify-between items-center border-b-[1px] border-slate-500">
       <div className="flex items-center space-x-4">
         <img
           src={RedditLogo}

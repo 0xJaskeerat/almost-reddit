@@ -18,7 +18,7 @@ const CommentList = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 space-y-2">
       {comments.map((comment) => (
         <Comment key={comment.$id} content={comment.content} />
       ))}
