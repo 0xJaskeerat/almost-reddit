@@ -28,7 +28,7 @@ const Home = () => {
       <Header />
       <div className="container mx-auto p-4">
         <CreatePost addPost={addPost} />
-        <PostList posts={posts} />
+        <PostList posts={posts} setPosts={setPosts} />
       </div>
     </div>
   );

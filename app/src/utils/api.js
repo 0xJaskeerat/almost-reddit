@@ -1,10 +1,11 @@
+import { Query } from 'appwrite';
 import { databases } from './appwrite';
 import { DATABASE_ID, POSTS_COLLECTION_ID, COMMENTS_COLLECTION_ID } from './constants';
 
 // Posts API
-export const createPost = async (title, content) => {
+export const createPost = async (title, content, imageId) => {
   try {
-    return await databases.createDocument(DATABASE_ID, POSTS_COLLECTION_ID, 'unique()', { title, content, upvotes: 0, downvotes: 0 });
+    return await databases.createDocument(DATABASE_ID, POSTS_COLLECTION_ID, 'unique()', { title, content, imageId });
   } catch (error) {
     console.error(error);
     throw error;
@@ -51,7 +52,8 @@ export const createComment = async (postId, content, userId) => {
 
 export const fetchComments = async (postId) => {
   try {
-    const response = await databases.listDocuments(DATABASE_ID, COMMENTS_COLLECTION_ID, [`postId=${postId}`]);
+    console.log("post id", postId);
+    const response = await databases.listDocuments(DATABASE_ID, COMMENTS_COLLECTION_ID, [Query.contains('postId', [`${postId}`])]);
     return response.documents;
   } catch (error) {
     console.error(error);
