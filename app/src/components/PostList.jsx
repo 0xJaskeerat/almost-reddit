@@ -8,7 +8,7 @@ const PostList = ({ posts, setPosts }) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 ml-[256px] mr-[288px]">
       {posts.map((post) => (
         <Post 
           key={post.$id} 
