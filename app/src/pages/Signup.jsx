@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { account } from '../utils/appwrite';
 import { useNavigate } from 'react-router-dom';
 import RedditLogo from '../../public/redditlogo.svg';
 

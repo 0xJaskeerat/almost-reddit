@@ -20,7 +20,7 @@ const Login = () => {
       setTimeout(() => {
           // dummy user
           setUser({ email });
-      }, 2000);\
+      }, 2000);
 
       navigate("/");
     } catch (error) {
