@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { account, client } from '../utils/appwrite';
 import { useNavigate } from 'react-router-dom';
 import RedditLogo from '../../public/redditlogo.svg';
+import AlmostRedditLogo from '../../public/almost-reddit-text.svg'
 import NotificationIcon from '../../public/notification.svg';
 import ChatIcon from '../../public/chat.svg';
 import UserAvatar from '../../public/Avatar.png';
@@ -32,8 +33,7 @@ const Header = ({ onCreatePostClick }) => {
   return (
     <header className="sticky top-0 bg-gray-800 text-white px-4 py-4 flex justify-between items-center border-b-[1px] border-slate-500">
       <div className="flex items-center space-x-4">
-        <img src={RedditLogo} alt="Reddit Logo" className="h-10 w-10" />
-        <h1 className="text-xl font-bold ml-2">Almost Reddit</h1>
+        <img src={AlmostRedditLogo} alt="Reddit Logo" className="h-auto w-40" />
       </div>
 
       <div className="flex-grow flex justify-center">
