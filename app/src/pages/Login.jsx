@@ -17,8 +17,12 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await account.createEmailPasswordSession(email, password);
-      setUser(res);
+      // TODO: Add login
+      setTimeout(() => {
+          // dummy user
+          setUser({ email });
+      }, 2000);
+
       navigate("/");
     } catch (error) {
       alert('Login failed');
@@ -27,43 +31,15 @@ const Login = () => {
 
   // login with github
   const handleLoginWithGithub = async () => {
-    try {
-      account.createOAuth2Session(
-        OAuthProvider.Github,
-        'http://localhost:5173/',
-        'http://localhost:5173/login',
-      );
-    } catch (error) {
-      alert('Github Login failed')
-    }
+   // TODO: Add login with Github
   }
 
   const handleLoginWithDiscord = () => {
-    try {
-      account.createOAuth2Session(
-        OAuthProvider.Discord,
-        'http://localhost:5173/',
-        'http://localhost:5173/login',
-      );
-    } catch (error) {
-      alert('Discord Login failed')
-    }
+   // TODO: Add login with Discord
   }
 
   const handleAnonymousLogin = () => {
-    try {
-      const promise = account.createAnonymousSession();
-
-      promise.then(function (response) {
-        if(response){
-          navigate('/')
-        }
-      }, function (error) {
-        console.log(error); // Failure
-      });
-    } catch (error) {
-      alert('Anonymous Login failed')
-    }
+    // TODO: Add anonymous login
   }
 
   return (

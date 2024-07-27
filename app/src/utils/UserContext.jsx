@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { account } from '../utils/appwrite';
 import Loader from '../components/Loader';
 
 const UserContext = createContext();
@@ -13,8 +12,9 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const accountData = await account.get();
-        setUser(accountData);
+        setTimeout(() => {
+          setUser({ email: 'test@test.com' });
+        }, 2000);
       } catch (error) {
         setUser(null);
       } finally {

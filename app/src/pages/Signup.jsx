@@ -12,8 +12,10 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await account.create('unique()', email, password, name);
-      navigate('/login');
+      //TODO: Add SignUp
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (error) {
       console.error(error);
       alert('Signup failed');
