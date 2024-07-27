@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { account } from '../utils/appwrite';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../utils/UserContext';
 import RedditLogo from '../../public/redditlogo.svg';
@@ -21,7 +20,7 @@ const Login = () => {
       setTimeout(() => {
           // dummy user
           setUser({ email });
-      }, 2000);
+      }, 2000);\
 
       navigate("/");
     } catch (error) {
