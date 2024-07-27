@@ -34,8 +34,8 @@ To run this project locally:
 3. Type the following commands
 
     ```bash
-    npm install
-    npm run dev
+    yarn install
+    yarn dev
     ```
 
 ## License
